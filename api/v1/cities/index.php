@@ -1,7 +1,7 @@
 <?php
 
-use App/Iran;
-use App/Utilities/Response;
+
+use App\Utilities\Response;
 
 $request_method=$_SERVER['REQUEST_METHOD'];
 

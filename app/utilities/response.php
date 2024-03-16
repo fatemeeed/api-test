@@ -1,6 +1,6 @@
 <?php
 
-namespace App/Utilities;
+namespace App\Utilities;
 
 class Response{
     public static function respond($data,$status_code=self::HTTP_OK)
@@ -100,7 +100,7 @@ class Response{
     public const HTTP_NOT_EXTENDED = 510;                                                // RFC2774
     public const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511; 
 
-    const STATUS_TEXTS = [
+    const  STATUS_TEXTS = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing',            // RFC2518
@@ -166,5 +166,5 @@ class Response{
     ];
 }
 
-?>
+
 
