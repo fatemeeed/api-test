@@ -2,6 +2,7 @@
 
 
 use App\Utilities\Response;
+use App\Services\CityService;
 
 $request_method=$_SERVER['REQUEST_METHOD'];
 
@@ -14,7 +15,8 @@ switch ($request_method) {
         $data=[
             'province_id' => $province_id
         ];
-        $response=getCities($data);
+        $response=new CityService;
+        $response->getCities($data);
          return Response::respondAndDie($response,Response::HTTP_OK);
         break;
     
