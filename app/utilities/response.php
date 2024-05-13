@@ -9,7 +9,7 @@ class Response{
 
         $response=[
             'http_status' =>$status_code ,
-            'http_message' => self:: STATUS_TEXTS($status_code) ,
+            'http_message' => self::STATUS_TEXT[$status_code] ,
             'http_data' => $data 
         ];
 
@@ -32,7 +32,7 @@ class Response{
         header("Access-Control-Allow-Methods: GET,POST,PUT,DELETE");
         header("Access-Control-Max-Age:3600");
         header("Access-Control-Allow-Header:Content-type,Access-Control-Allow-headers,Authorization,X-Request-With");
-        header("HTTP/1.1 $status_code". self::STATUS_TEXTS[$status_code]);
+        header("HTTP/1.1 $status_code". self::STATUS_TEXT[$status_code]);
 
     }
 
@@ -100,7 +100,7 @@ class Response{
     public const HTTP_NOT_EXTENDED = 510;                                                // RFC2774
     public const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511; 
 
-    const  STATUS_TEXTS = [
+    public const STATUS_TEXT = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing',            // RFC2518
