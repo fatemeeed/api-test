@@ -37,31 +37,50 @@ class CityService
     {
 
 
+        if(!$this->isValidCity($data)){
+
+            return false;
+
+        }
         $value=[
             'province_id' => $data['province_id'],
             'name' =>$data['name']
         ];
         $conn = DBConnection::getDBConnectionInstance();
-        $query = "insert into city ('province_id','name') values (:province_id,:name)";
+        $query = "insert into `city` (`province_id`,`name`) values (:province_id,:name)";
       
         $conn->prepare($query)->execute($value);
         return true;
     }
 
-    // // Validation
-    // public function isValidCity($data)
-    // {
-    //     if (empty($data['province_id']) || !is_numeric($data['province_id']))
-    //         return false;
+    public function UpdateCityName($city_id,$name)
+    {
 
-    //     return empty($data['name']) ? false : true;
-    // }
+      
+        $conn = DBConnection::getDBConnectionInstance();
+        $query = "update city set name='$city_id' where id='$name'";
+      
+        $conn->prepare($query)->execute();
+        return true;
 
-    // public function isValidProvince($data)
-    // {
 
-    //     return empty($data['name']) ? false : true;
-    // }
+
+    }
+
+    // Validation
+    public function isValidCity($data)
+    {
+        if (empty($data['province_id']) || !is_numeric($data['province_id']))
+            return false;
+
+        return empty($data['name']) ? false : true;
+    }
+
+    public function isValidProvince($data)
+    {
+
+        return empty($data['name']) ? false : true;
+    }
 
 
 }
