@@ -10,19 +10,37 @@ class DBConnection{
     public $servername = "localhost";
     public $username = "root";
     public $password = "";
+    public $dbname="iran";
     public $conn="";
+    private static $dbConnectionInstance = null;
 
     public function __construct()
     {
-
-        try {
-            $this->conn = new PDO("mysql:host=$this->servername;dbname=iran", $this->username, $this->password);
-            // set the PDO error mode to exception
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connected successfully";
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-        }
         
+    }
+
+    public static function getDBConnectionInstance()
+    {
+        if(self::$dbConnectionInstance ==null)
+        {
+            $DBConnectionInstance=new DBConnection;
+            self::$dbConnectionInstance=$DBConnectionInstance->dbConnection();
+        }
+        return self::$dbConnectionInstance;
+
+    }
+
+    private function dbConnection()
+    {
+        $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
+        try{
+            return new PDO("mysql:host=" . $this->servername . ";dbname=" . $this->dbname, $this->username, $this->password, $options);
+        }
+        catch (PDOException $e){
+            echo "error in database connection: " . $e->getMessage();
+            return false;
+        }
+
+
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use PDO;
 use PDOException;
+use App\Services\DBConnection;
 
 // <!-- pdo conection -->
 
@@ -11,16 +12,13 @@ use PDOException;
 
 class CityService
 {
-    
-
-
 
 
     public  function getCities($data = null)
     {
-        
-        global $conn;
-        
+
+        $conn = DBConnection::getDBConnectionInstance();
+
         $province_id = $data['province_id'] ?? null;
         $where = '';
 
@@ -28,14 +26,42 @@ class CityService
             $where = "province_id={$province_id} ";
         }
 
-        $query="SELECT * FROM city {$where}";
-      
+        $query = "SELECT * FROM city {$where}";
         $sth = $conn->prepare($query);
-      
         $sth->execute();
-        
         $records = $sth->fetchAll(PDO::FETCH_ASSOC);
-
         return $records;
     }
+
+    public function createCity($data)
+    {
+
+
+        $value=[
+            'province_id' => $data['province_id'],
+            'name' =>$data['name']
+        ];
+        $conn = DBConnection::getDBConnectionInstance();
+        $query = "insert into city ('province_id','name') values (:province_id,:name)";
+      
+        $conn->prepare($query)->execute($value);
+        return true;
+    }
+
+    // // Validation
+    // public function isValidCity($data)
+    // {
+    //     if (empty($data['province_id']) || !is_numeric($data['province_id']))
+    //         return false;
+
+    //     return empty($data['name']) ? false : true;
+    // }
+
+    // public function isValidProvince($data)
+    // {
+
+    //     return empty($data['name']) ? false : true;
+    // }
+
+
 }
