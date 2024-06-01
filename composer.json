@@ -1,8 +1,15 @@
 {
-    "require": {},
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    },
     "autoload": {
+        "files": [
+            "app/iran.php"
+        ],
         "psr-4": {
             "App\\": "app/"
+           
+           
         }
     }
     

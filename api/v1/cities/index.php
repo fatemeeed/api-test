@@ -1,6 +1,6 @@
 <?php
 
-require  '../../../vendor/autoload.php';
+include_once  '../../../vendor/autoload.php';
 
 
 use App\Utilities\Response;
@@ -36,12 +36,21 @@ switch ($request_method) {
 
     case 'PUT':
 
-        [$city_id,$name]=[$request_body['city_id'],$request_body['name']];
-        $result = $response->UpdateCityName($city_id,$name);
+        [$city_id, $name] = [$request_body['city_id'], $request_body['name']];
+        $result = $response->UpdateCityName($city_id, $name);
         if ($result)
             return Response::respondAndDie($result, Response::HTTP_OK);
         else
             return Response::respondAndDie($result, Response::HTTP_NOT_FOUND);
 
+    case 'DELETE':
 
+        $city_id = $request_body['city_id'];
+        $result = $response->destroy($city_id);
+        if ($result)
+            return Response::respondAndDie($result, Response::HTTP_OK);
+        else
+            return Response::respondAndDie($result, Response::HTTP_NOT_FOUND);
+
+        
 }

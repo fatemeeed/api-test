@@ -6,7 +6,15 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit8eff87a03f05d3de518d9e895d8a15b2
 {
+    public static $files = array (
+        '9e2f6c0a023558b28803ee15b1f12727' => __DIR__ . '/../..' . '/app/iran.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -14,6 +22,10 @@ class ComposerStaticInit8eff87a03f05d3de518d9e895d8a15b2
     );
 
     public static $prefixDirsPsr4 = array (
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',

@@ -67,6 +67,16 @@ class CityService
 
     }
 
+    public function destroy($city_id)
+    {
+        $conn = DBConnection::getDBConnectionInstance();
+        $query = "delete from city where id=$city_id";
+      
+        $conn->prepare($query)->execute();
+        return true;
+
+    }
+
     // Validation
     public function isValidCity($data)
     {
