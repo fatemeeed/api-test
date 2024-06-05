@@ -1,9 +1,11 @@
 
 <?php 
-include_once '../vendor/autoload.php';
+require '../vendor/autoload.php';
+
+
 ?>
 <form action="" method="post">
-    <input type="email" name="email"><input type="submit" value="generate key">
+    <input type="email" name="email"><button type="submit" value="generate key">generate key</button>
 </form>
 
 <?php
@@ -11,7 +13,9 @@ include_once '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 
 
-if($_SERVER['REQUEST_METHOD'] != 'post')
+
+
+if($_SERVER['REQUEST_METHOD'] != 'POST')
 die();
 
 $email=$_POST['email'];
@@ -28,6 +32,9 @@ $payload = [
  * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
  * for a list of spec-compliant algorithms.
  */
+
+ define('JWT_KEY','example_key');
+ define('JWT_ALG','HS256');
 $jwt = JWT::encode($payload, JWT_KEY , JWT_ALG );
 
-return 'jwt'. '<textarea name="" id="">'. $jwt .'</textarea>';
+print 'jwt'. '<textarea name="" id="">'. $jwt .'</textarea>';
